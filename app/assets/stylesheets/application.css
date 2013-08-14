@@ -11,3 +11,9 @@
  *= require_self
  *= require_tree .
  */
+
+.error-box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+}

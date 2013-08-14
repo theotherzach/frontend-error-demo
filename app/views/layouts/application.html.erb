@@ -2,13 +2,34 @@
 <html>
 <head>
   <title>ClientError</title>
+  <script>
+    (function(){
+      "use strict";
+      function postError(errorData) {
+        $.ajax({
+          type: "POST",
+          url: "/api/errors",
+          data: errorData,
+        });
+      }
+
+      window.addEventListener('error', function(event) {
+        var errorData = {
+          msg: event.message,
+          file: event.filename,
+          lineno: event.lineno,
+        };
+        postError(errorData);
+      });
+    }());
+  </script>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
